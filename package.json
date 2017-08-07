@@ -37,6 +37,7 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
+    "fn-reduce": "^0.1.0",
     "slice-calculator": "^0.1.0"
   },
   "pre-commit": {
