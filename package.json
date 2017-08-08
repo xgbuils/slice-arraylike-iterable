@@ -38,7 +38,8 @@
   },
   "dependencies": {
     "fn-reduce": "^0.1.0",
-    "slice-calculator": "^0.1.0"
+    "slice-calculator": "^0.1.0",
+    "value-descriptors-factory": "^0.1.0"
   },
   "pre-commit": {
     "run": "test"
