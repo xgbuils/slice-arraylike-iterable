@@ -5,7 +5,7 @@
 [![Coverage Status][5]][6]
 [![Dependency Status][7]][8]
 
-`slice-arraylike-iterable` exports a class that builds iterables that provide slice method.
+`slice-arraylike-iterable` exports a class that, given an array-like iterable, builds iterables that provide slice method.
 
 ## Install
 
@@ -14,7 +14,7 @@ $ npm install slice-arraylike-iterable --save
 ```
 
 ## Usage
-``` JavaScript
+``` javascript
 const SliceArrayLikeIterable = require('slice-arraylike-iterable')
 
 const iterable = new SliceArrayLikeIterable([4, 2, 7, 8, 4, 7]) // (4 2 7 8 4 7)
@@ -35,16 +35,17 @@ let iterator = iterable[Symbol.iterator]()
 iterator.next() // {value: 8, done: false}
 iterator.next() // {value: undefined, done: true}
 
-// Infinite iterable
-const naturals = {
-    [Symbol.iterator]: function* () {
-        let i = 1
-        while(true) { yield i++ }
-    }
-} // (1 2 3 4...)
+// the same with string
+const string = 'abcdef'
 
-new SliceArrayLikeIterable(naturals) // (1 2 3 4 5 6 7 8 9...)
-    .slice(3, 8) // (4 5 6 7 8)
+new SliceArrayLikeIterable(string) // ('a' 'b' 'c' 'd' 'e' 'f')
+    .slice(1, 4) // ('b' 'c' 'd')
+
+// the same with typed array
+const typedArray = new Uint8Array([128, 0, 0, 1])
+
+new SliceArrayLikeIterable(naturals) // (128 0 0 1)
+    .slice(0, 3) // (128 0 0)
 ```
 
 ## Support
