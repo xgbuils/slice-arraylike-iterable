@@ -39,7 +39,7 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
-    "value-descriptors-factory": "^0.1.0"
+    "slice-calculator": "^0.1.0"
   },
   "pre-commit": {
     "run": "test"
