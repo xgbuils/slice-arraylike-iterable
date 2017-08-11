@@ -7,13 +7,12 @@ class SliceArrayLikeIterable {
 
     slice (start, end) {
         start = Math.max(start, 0)
-        const newStart = this.start + start
-        const newEnd = Math.min(newStart + (end - start), this.end)
+        const newEnd = Math.min(this.start + end, this.end)
         if (start === 0 && newEnd === this.end) {
             return this
         }
         const obj = Object.create(SliceArrayLikeIterable.prototype)
-        obj.start = newStart
+        obj.start = this.start + start
         obj.end = newEnd
         obj.iterable = this.iterable
         return obj
