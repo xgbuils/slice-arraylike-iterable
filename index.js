@@ -10,12 +10,13 @@ class SliceArrayLikeIterable {
     }
 
     slice (start, end) {
-        if (this.length <= 0) {
+        const thisLength = this.length
+        if (thisLength <= 0) {
             return this
         }
-        const newStart = Math.max(start, 0)
-        const newLength = Math.min(end, this.length)
-        if (newStart === 0 && newLength === this.length) {
+        const newStart = start <= 0 ? 0 : start
+        const newLength = end >= thisLength ? thisLength : end
+        if (newStart === 0 && newLength === thisLength) {
             return this
         }
         return Object.create(SliceArrayLikeIterable.prototype, vdf({
