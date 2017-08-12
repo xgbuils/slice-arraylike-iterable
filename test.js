@@ -55,6 +55,20 @@ test('slice', function (t) {
             'must return empty iterable')
         st.end()
     })
+    t.test('out of boundaries', function (st) {
+        const iterable = new SliceArrayLikeIterable(array)
+        const result = iterable.slice(-1, 8)
+        st.equal(iterable, result,
+            'must return the same iterable reference')
+        st.end()
+    })
+    t.test('the same boundaries', function (st) {
+        const iterable = new SliceArrayLikeIterable(array)
+        const result = iterable.slice(0, array.length)
+        st.equal(iterable, result,
+            'must return the same iterable reference')
+        st.end()
+    })
     t.test('positive start and end', function (st) {
         const iterable = new SliceArrayLikeIterable(array).slice(2, 3)
         st.deepEqual([...iterable], array.slice(2, 3),
