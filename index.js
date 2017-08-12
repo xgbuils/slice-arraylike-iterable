@@ -1,34 +1,29 @@
-function* generator () {
-    const iterable = this.iterable
-    const end = this.end
-    for (let i = this.start; i < end; ++i) {
-        yield iterable[i]
+class SliceArrayLikeIterable {
+    constructor (iterable) {
+        this.iterable = iterable
+        this.start = 0
+        this.end = iterable.length
     }
-}
 
-function slice (start, end) {
-    start = Math.max(start, 0)
-    const oldEnd = this.end
-    const newEnd = Math.min(this.start + end, oldEnd)
-    if (start === 0 && newEnd === oldEnd) {
-        return this
+    slice (start, end) {
+        start = Math.max(start, 0)
+        const newEnd = Math.min(this.start + end, this.end)
+        if (start === 0 && newEnd === this.end) {
+            return this
+        }
+        const obj = Object.create(SliceArrayLikeIterable.prototype)
+        obj.start = this.start + start
+        obj.end = newEnd
+        obj.iterable = this.iterable
+        return obj
     }
-    return {
-        start: this.start + start,
-        end: newEnd,
-        iterable: this.iterable,
-        slice,
-        [Symbol.iterator]: generator
-    }
-}
 
-function SliceArrayLikeIterable (iterable) {
-    return {
-        start: 0,
-        end: iterable.length,
-        iterable,
-        slice,
-        [Symbol.iterator]: generator
+    * [Symbol.iterator] () {
+        const iterable = this.iterable
+        const end = this.end
+        for (let i = this.start; i < end; ++i) {
+            yield iterable[i]
+        }
     }
 }
 
